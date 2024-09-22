@@ -121,7 +121,7 @@ This document contains the following sections:
 ### Directory Traversal
 * URL parameter manipulation and pathname construction
 * Access to restricted and hidden directories
-* Access tp confidential and proprietary data
+* Access t0 confidential and proprietary data
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/directory_traversal.png)
 
 ### Exploitation: Password Cracking
