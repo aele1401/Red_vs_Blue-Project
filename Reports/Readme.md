@@ -56,7 +56,7 @@ This document contains the following sections:
             * No Need for Discovery: If usernames are simple or follow predictable patterns (e.g., first names, email prefixes), attackers do not need to spend time or resources discovering valid usernames. This dramatically speeds up their brute force attempts, as they only need to focus on guessing the correct password once they have a valid username.
             * Default Usernames: Many web applications come with default usernames like "admin" or "root." Attackers know this, and these usernames are almost always the first ones targeted in brute force attacks.
             * Exposed to Enumeration Attacks: In some systems, attackers can use username enumeration techniques to discover whether a username exists. If a system responds differently for valid and invalid usernames (e.g., showing "Invalid password" for valid usernames and "Invalid username" for invalid usernames), attackers can quickly compile a list of valid usernames for the brute force attack.
-            Higher Success Rate: The simpler and more predictable the username, the easier it is for attackers to guess it, making brute force attacks far more likely to succeed.
+            * Higher Success Rate: The simpler and more predictable the username, the easier it is for attackers to guess it, making brute force attacks far more likely to succeed.
             * Reduced Effort: Attackers can reduce the time and effort needed for reconnaissance and focus entirely on password guessing, increasing the speed of an attack.
     * Weak Passwords: Short, common, simple, or non-complex passwords.
         - Impact:
