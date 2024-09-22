@@ -10,7 +10,7 @@ This document contains the following sections:
 
 ## Network Toplogy
 
-- Network Address Range: 1932.168.1.0/24
+- Network Address Range: 192.168.1.0/24
 - Netmask: 255.255.255.0
 - Gateway: 192.168.1.1
 
