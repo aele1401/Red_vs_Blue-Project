@@ -80,7 +80,6 @@ This document contains the following sections:
             * In this case, the attacker can access the `/etc/passwd` file (on Linux systems), which contains user account information, including encrypted passwords, thereby potentially gaining further access to the system.
     * Hashed & Salted Passwords: A salt is a random string added to a password before hashing it. This process ensures that even if two users have the same password, their hashes will be different, making it much harder for attackers to use precomputed hash tables (such as rainbow tables) to crack passwords.
         - Impact:
-            * 
             * Password Hash Reuse: Without salts, identical passwords will produce identical hashes. If multiple users have the same password, all their hashes will be identical in the database, allowing an attacker to crack one and immediately know the passwords for all users with the same hash.
             * Rainbow Table Attacks: Rainbow tables are precomputed tables of common passwords and their corresponding hash values. If a database uses unsalted passwords, an attacker can simply compare the password hashes to those in the rainbow table to quickly reverse the hash back into the original password.
             * Dictionary Attacks: Even without a rainbow table, attackers can use dictionaries of common passwords to generate hashes and compare them to the stored hashes. This process is faster when passwords are unsalted because the attacker doesn’t need to handle the extra complexity of individual salts for each password.
@@ -123,7 +122,7 @@ This document contains the following sections:
 * URL parameter manipulation and pathname construction
 * Access to restricted and hidden directories
 * Access tp confidential and proprietary data
-![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/directory_traversal.PNG)
+![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/directory_traversal.png)
 
 ### Exploitation: Password Cracking
 - Crackstation.net to crack Ryan's hashed password
@@ -136,8 +135,8 @@ This document contains the following sections:
     * MSF Venom and multihandler exploit tools to deliver a meterpreter shell payload
 - Reverse shell uploaded on target machine
 - Access to target machine's shell
-[Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/meterpreter_shell.PNG)
-[Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/shell_php.PNG)
+![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/meterpreter_shell.PNG)
+![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/shell_php.PNG)
 
 ### Avoiding Detection - Port Scanning
 - Stealth scans (SYN scan or decoy scanning by obfuscating the origin of a network scan by creating multiple fake source IP addresses)
@@ -265,7 +264,7 @@ This document contains the following sections:
     * Blacklist IP addresses outside of set range
     * Set alerts for requests made from devices not on list
 - System Hardening:
-    * Effecitve password policies
+    * Effective password policies
     * Whitelist IPs
     * Prevent unauthorized access
 ### Mitigation: Identifying Reverse Shell Uploads
@@ -275,7 +274,7 @@ This document contains the following sections:
 - System Hardening:
     * Filter ports
     * Filter IP addresses
-    * Set perimissions and access controls
+    * Set permissions and access controls
     * Baseline configurations
     * Implement proper security controls
     * Require password with sudo commands
