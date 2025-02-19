@@ -36,21 +36,21 @@ This document contains the following sections:
 ### Vulnerability Assessment
 
 - Assessment uncovered the following critical vulnerabilities:
-    * Open Ports (CAPEC-300): Port 80 is commonly used for web communication, and if left open, unsecure, with no security controls, it can be exploited.
+    * **Open Ports (CAPEC-300)**: Port 80 is commonly used for web communication, and if left open, unsecure, with no security controls, it can be exploited.
         - Impact: 
             * Access to web server
             * Increased attack surface with services running on port to be exploited via SQL injection, XSS, or RCE.
             * Unencrypted traffic allows for MITM attacks where data can be intercepted.
-            * Brute force or DDOS attacks maybe invited where web server can be overwhelmed with traffic reducing availability.
+            * Brute force or DDoS attacks maybe invited where web server can be overwhelmed with traffic reducing availability.
             * Regulatory and compliance issues. PCI DSS and HIPAA require encryption with transmitting sensitive data. Failing to secure port 80 with proper encryption could lead to compliance violations.
-    * Brute Force Attack & Insufficient Security Measures (CWE-307): An attack that consists of systematically checking all possible username and password combinationsuntil the correct one is found.
+    * **Brute Force Attack & Insufficient Security Measures (CWE-307)**: An attack that consists of systematically checking all possible username and password combinations until the correct one is found.
         - Impact:
             * Improper controls implemented to prevent multiple failed login attempts.
             * Once attackers successfully guess valid credentials, they can log into the web application with the same privileges as the legitimate user, potentially escalating privileges or stealing sensitive data.
             * Since HTTP traffic is not encrypted on port 80, attackers can intercept the login attempts, decode the Base64-encoded credentials, and brute force the password without much difficulty.
             * Gaining access to an admin panel can allow an attacker to take full control of the web server or web application, modify content, or even execute commands on the server.
             * If they find unprotected directories, they might gain access to critical files, databases, or configuration settings, leading to further compromise.
-    * Simple User Names: Short names, first names, or any simple combinations.
+    * **Simple User Names**: Short names, first names, or any simple combinations.
         - Impact:
             * Easily Guessable: Usernames like Ashton, Ryan, and Hannah are all simple usernames that can be easily obtained.
             * No Need for Discovery: If usernames are simple or follow predictable patterns (e.g., first names, email prefixes), attackers do not need to spend time or resources discovering valid usernames. This dramatically speeds up their brute force attempts, as they only need to focus on guessing the correct password once they have a valid username.
@@ -58,7 +58,7 @@ This document contains the following sections:
             * Exposed to Enumeration Attacks: In some systems, attackers can use username enumeration techniques to discover whether a username exists. If a system responds differently for valid and invalid usernames (e.g., showing "Invalid password" for valid usernames and "Invalid username" for invalid usernames), attackers can quickly compile a list of valid usernames for the brute force attack.
             * Higher Success Rate: The simpler and more predictable the username, the easier it is for attackers to guess it, making brute force attacks far more likely to succeed.
             * Reduced Effort: Attackers can reduce the time and effort needed for reconnaissance and focus entirely on password guessing, increasing the speed of an attack.
-    * Weak Passwords: Short, common, simple, or non-complex passwords.
+    * **Weak Passwords**: Short, common, simple, or non-complex passwords.
         - Impact:
             * Easily Guessable: Weak passwords are often short, use simple patterns, or common words (e.g., "password," "123456," "qwerty"). These are easily cracked by attackers using brute force techniques or dictionary attacks, where automated tools try a large list of common passwords.
             * Reused Across Multiple Accounts: Many users tend to reuse weak passwords across multiple platforms. If one account is compromised, attackers may try the same password on other services, increasing the potential for widespread access.
@@ -66,7 +66,7 @@ This document contains the following sections:
             * Data Theft: Access to sensitive information like personal data, business documents, or financial information.
             * System Compromise: An attacker can modify system settings, install malware, or further escalate privileges.
             * Lateral Movement: Once inside the network, an attacker can use the compromised account to move laterally to other systems.
-    * Directory Path Traversal (CWE-23): Improper access controls and filtering allowing access to restricted and hidden directories where attacks exploit improperly validated user input, especially when the input is used to specify file paths on the server. Attackers manipulate the file path parameters (e.g., `../` or `..\`) to move up the directory structure and access files beyond the intended scope.
+    * **Directory Path Traversal (CWE-23)**: Improper access controls and filtering allowing access to restricted and hidden directories where attacks exploit improperly validated user input, especially when the input is used to specify file paths on the server. Attackers manipulate the file path parameters (e.g., `../` or `..\`) to move up the directory structure and access files beyond the intended scope.
         - Impact:
             * Allows unrestricted access to WebDAV directories.
             * Access to Sensitive Files: Attackers can read sensitive system files such as `/etc/passwd` (Linux) or `C:\Windows\System32\config\SAM` (Windows), which may contain user account information, password hashes, or other critical data.
@@ -78,7 +78,7 @@ This document contains the following sections:
             * Consider a website that allows users to download reports through a URL parameter: `http://example.com/download?file=report.pdf`
             * If the application doesn’t validate or sanitize the input properly, an attacker could modify the URL: `http://example.com/download?file=../../../etc/passwd`
             * In this case, the attacker can access the `/etc/passwd` file (on Linux systems), which contains user account information, including encrypted passwords, thereby potentially gaining further access to the system.
-    * Hashed & Salted Passwords: A salt is a random string added to a password before hashing it. This process ensures that even if two users have the same password, their hashes will be different, making it much harder for attackers to use precomputed hash tables (such as rainbow tables) to crack passwords.
+    * **Hashed & Salted Passwords**: A salt is a random string added to a password before hashing it. This process ensures that even if two users have the same password, their hashes will be different, making it much harder for attackers to use precomputed hash tables (such as rainbow tables) to crack passwords.
         - Impact:
             * Password Hash Reuse: Without salts, identical passwords will produce identical hashes. If multiple users have the same password, all their hashes will be identical in the database, allowing an attacker to crack one and immediately know the passwords for all users with the same hash.
             * Rainbow Table Attacks: Rainbow tables are precomputed tables of common passwords and their corresponding hash values. If a database uses unsalted passwords, an attacker can simply compare the password hashes to those in the rainbow table to quickly reverse the hash back into the original password.
@@ -91,7 +91,7 @@ This document contains the following sections:
                 - Alice: `sha256(a1b2c3 + password123)`
                 - Bob: `sha256(d4e5f6 + password123)`
             * In this case, the resulting hashes will be different, even though the passwords are the same, making it much harder for an attacker to crack both hashes.
-    * Local File Inclusion LFI (CAPEC-252): a type of web vulnerability that allows an attacker to trick the web application into exposing or executing files on the server. This vulnerability occurs when a web application dynamically includes files using user-supplied input without proper validation. If exploited, LFI can lead to sensitive data disclosure, code execution, privilege escalation, and even full system compromise. LFI vulnerabilities typically arise when a web application takes input from a user to determine which file to include or load on the server, and that input is not properly sanitized. Attackers can manipulate the input to gain access to local files that the web server shouldn't expose.
+    * **Local File Inclusion LFI (CAPEC-252)**: a type of web vulnerability that allows an attacker to trick the web application into exposing or executing files on the server. This vulnerability occurs when a web application dynamically includes files using user-supplied input without proper validation. If exploited, LFI can lead to sensitive data disclosure, code execution, privilege escalation, and even full system compromise. LFI vulnerabilities typically arise when a web application takes input from a user to determine which file to include or load on the server, and that input is not properly sanitized. Attackers can manipulate the input to gain access to local files that the web server shouldn't expose.
         - Impact:
             * Access to Sensitive Files: Attackers can read files on the server, such as configuration files, database credentials, password files, and logs, which can contain sensitive information, such as the `/etc/passwd` file which contains user account information, `wp-config.php` file that contains database credentials, and `log files` that contain sensitive information like session tokens and user activity logs.
             * Remote Code Execution (RCE): If an attacker can include files that the server executes (e.g., log files or uploaded files), they may be able to inject code that gets executed by the server, leading to remote code execution. For example, if an attacker can write to a log file and then include that file using LFI, they could potentially inject malicious code into the log and execute it.
@@ -108,6 +108,7 @@ This document contains the following sections:
     - Port 80 - Web
     - SSH with discovered credentials
     - Access web server
+
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/NMAP.PNG)
 
 ### Exploitation: Brute Force User Accounts
@@ -115,6 +116,7 @@ This document contains the following sections:
 * Hydra to brute force password
 * Access to Ashton's user account
 * Hashes for Ryan's account obtained through Ashton's compromised account
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/Bruteforce.PNG)
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/login.PNG)
 
@@ -122,21 +124,24 @@ This document contains the following sections:
 * URL parameter manipulation and pathname construction
 * Access to restricted and hidden directories
 * Access to confidential and proprietary data
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/directory_traversal.png)
 
 ### Exploitation: Password Cracking
 - Crackstation.net to crack Ryan's hashed password
 - Ryan's account compromised
 - Access to WebDAV directories
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/crackstation.PNG)
 
 ### Exploitation: LFI Vulnerability
 - Metasploit framework
     * MSF Venom and multihandler exploit tools to deliver a meterpreter shell payload
 - Reverse shell uploaded on target machine
-- Access to target machine's shell
+- Direct access to target machine
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/meterpreter_shell.PNG)
-![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/shell_php.PNG)
+![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/shell_php.png)
 
 ### Avoiding Detection - Port Scanning
 - Stealth scans (SYN scan or decoy scanning by obfuscating the origin of a network scan by creating multiple fake source IP addresses)
@@ -171,6 +176,7 @@ This document contains the following sections:
 - Scans began on 05/04/2021 around 22:00 hours
 - 51,185 connections originating from IP 192.168.1.90
 - Sudden spikes and fluctuations in traffic indicates port scan
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/connections_shot.PNG)
 
 ### Finding the Request for the Hidden Directory
@@ -178,17 +184,20 @@ This document contains the following sections:
 - 48,324 requests made to secret directory
 - Directory contains password hashes for Ryan's account
 - LFI allows for meterpreter shell payload to be uploaded
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/HTTP_Requests.PNG)
 
 ### Analysis: Uncovering the Brute Force Attack
 - 48,324 requests made
 - Only 8 successful attacks
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/Bruteforce.PNG)
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/Uncovering_Bruteforce.PNG)
 
 ### Analysis: Finding the WebDAV Connection
 - 4 requests for the WebDAV folder
 - Most requests for `shell.php` and `passwd.dav` files
+  
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/HTTP_Transactions.PNG)
 ![Diagram](https://github.com/aele1401/WebDav_Pentest/blob/main/Images/webdav_packetbeat.PNG)
 
@@ -196,7 +205,7 @@ This document contains the following sections:
 
 ### Mitigating Port Scans
 - Implementing Alerts, Processes, and Tools:
-    * Set alert for unusually high number of connection attempts (Per IP) with 5,000 connections per hour.
+    * Set alert for unusually high number of connection attempts (Per IP) with 5,000 connections per hour
     * Alerts for connection attempts to unused or closed ports
     * SYN scan detection
     * Stealth scan detection (XMAS, FIN, null, or decoy scans)
@@ -209,7 +218,7 @@ This document contains the following sections:
         - SIEM & SOAR
         - IDS & IPS
         - EDR & AV
-    * Conduct threat huntiing, research, security testing, OSINT, an incident response plan, and additional tools and methods to create custom detections and alerts for environment.
+    * Conduct threat hunting, research, security testing, OSINT, an incident response plan, and additional tools and methods to create custom detections and alerts for environment.
         - Tailor alerts to environment
         - Less detections that are highly effective
 - Firewall Implementation:
@@ -240,7 +249,7 @@ This document contains the following sections:
     * Detect Scanners: Deploy honeypots that are designed to look like real services but are meant to attract and log unauthorized access attempts, such as port scans.
     * Divert and Study Attacks: Honeypots help collect data on the tactics attackers use, allowing you to respond to emerging threats more effectively.
 ### Mitigation: Finding the Request for the Hidden Directory
-- Alarms:
+- Alerts:
     *  Set alerts for requests made to restricted directories
     * Set alerts for unauthorized access into restricted directories
     * No more than 8 attempts per hour
@@ -249,7 +258,7 @@ This document contains the following sections:
     * Restrict public access
     * Limit sharing of confidential files
 ### Mitigation: Preventing Brute Force Attacks
-- Alarms:
+- Alerts:
     * Alerts for 401 errors
     * 10 errors per hour
 - System Hardening:
@@ -258,7 +267,7 @@ This document contains the following sections:
     * Limit failed login attempts
     * Review account policies
 ### Mitigation: Detecting the WebDAV Connection
-- Alarms & Implementations:
+- Alerts & Implementations:
     * Create a list of WebDAV users (ACLs)
     * Whitelist IP addresses (only from trusted sources)
     * Blacklist IP addresses outside of set range
@@ -268,7 +277,7 @@ This document contains the following sections:
     * Whitelist IPs
     * Prevent unauthorized access
 ### Mitigation: Identifying Reverse Shell Uploads
-- Alarms:
+- Alerts:
     * Set alerts for uploads into restricted directories
     * Alerts on ports 4444, 443, and 80
 - System Hardening:
