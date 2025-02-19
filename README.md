@@ -20,7 +20,7 @@ This section delves into offensive security measures, including:
 - Exploitation Techniques: Methods to exploit identified vulnerabilities, such as unauthorized file access or code execution.
 - Avoiding Detection: Strategies to remain undetected during penetration testing activities.
 
-For instance, exploiting WebDAV vulnerabilities can lead to unauthorized code execution on the server. It's essential to understand these attack vectors to effectively defend against them
+For instance, exploiting WebDAV vulnerabilities can lead to unauthorized code execution on the server. It's essential to understand these attack vectors to effectively defend against them.
 
 ## Blue Team Activities
 Defensive measures are outlined in this section, focusing on:
